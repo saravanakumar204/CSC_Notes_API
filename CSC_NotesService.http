@@ -1,0 +1,6 @@
+@CSC_NotesService_HostAddress = http://localhost:5155
+
+GET {{CSC_NotesService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

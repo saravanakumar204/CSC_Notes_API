@@ -1,0 +1,74 @@
+﻿@page "/notesList"
+@using CSC_NotesService.Models
+@inject NotesContext Context
+
+<h3>Product List</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var note in Context.Notes)
+        {
+            <tr>
+                <td>@note.Type</td>
+                <td>@note.Description</td>
+                <td>
+                    <button @onclick="() => EditNote(note.NotesId)">Edit</button>
+                    <button @onclick="() => DeleteNote(note.NotesId)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Add/Edit Product</h3>
+<input @bind="currentProduct.Name" placeholder="Name" />
+<input @bind="currentProduct.Price" placeholder="Price" />
+<button @onclick="SaveProduct">Save</button>
+
+@code {
+    private List<Notes> notes;
+    private Notes currentNote = new Notes();
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     notes = await Context.Notes.ToListAsync();
+    // }
+
+    // private async Task SaveProduct()
+    // {
+    //     if (currentProduct.Id == 0)
+    //     {
+    //         Context.Notes.Add(currentProduct);
+    //     }
+    //     else
+    //     {
+    //         Context.Notes.Update(currentProduct);
+    //     }
+    //     await Context.SaveChangesAsync();
+    //     notes = await Context.Notes.ToListAsync();
+    //     currentProduct = new NotesList();
+    // }
+
+    // private void EditProduct(int id)
+    // {
+    //     currentProduct = notes.FirstOrDefault(p => p.Id == id);
+    // }
+
+    // private async Task DeleteProduct(int id)
+    // {
+    //     var product = await Context.Notes.FindAsync(id);
+    //     if (product != null)
+    //     {
+    //         Context.Notes.Remove(product);
+    //         await Context.SaveChangesAsync();
+    //         notes = await Context.Notes.ToListAsync();
+    //     }
+    // }
+}
